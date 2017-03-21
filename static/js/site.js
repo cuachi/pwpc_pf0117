@@ -1,3 +1,3 @@
 function saludar(){
-    alert("Bienvenido a mi sitio");
+    sweetAlert("Muy bien!!","Tu server funciona :D","success");
 };
