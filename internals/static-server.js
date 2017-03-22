@@ -20,11 +20,13 @@ exports.server = function(req, res) {
             console.log("> El recurso existe...".info);
             fs.readFile(resourcePath, function(err, content) {
                 if (err) {
+                    resourcePath = 'static/500.html';
                     console.log("> Error en la lectura de recurso".error);
                     res.writeHead(500, {
                         'content-Type': 'text/html',
                     });
-                    res.end('<h1>500: Error interno</h1>');
+                    res.write('<link rel="stylesheet" href="css/site.css">');
+            res.end('<div class="dialog"><div><h1>Lo sentimos pero algo salio mal.</h1></div><p>Si eres el due&ntildeo del servidor revisa el log.</p></div>', 'utf-8');
                 } else {
                     console.log(`> Se despacha recurso: ${resourcePath}`.info);
                     res.writeHead(200, {
@@ -40,7 +42,8 @@ exports.server = function(req, res) {
                 'content-Type': contentType,
                 'server': 'ITGAM@0.0.1'
             });
-            res.end('<h1> 404: Not Found</h1>');
+            res.write('<link rel="stylesheet" href="css/site.css">');
+            res.end('<div class="dialog"><div><h1>La url que buscas no existe.</h1><p>Posiblemente sea un error de escritura en la direcci&oacuten o fue movido</p></div><p>Si eres el due&ntildeo del servidor revisa el log.</p></div>', 'utf-8');
         }
     });
 }
